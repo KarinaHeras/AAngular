@@ -1,0 +1,50 @@
+
+<p>create-post works!</p>
+
+<form [formGroup]=" formularioPost">
+<h2>Craer Post</h2>
+<p>
+  <span>Author:</span>
+  <input type="text" formControlName="author" class="form-control">
+</p>
+<p>
+  <span>Nickname:</span>
+  <input type="text" formControlName="nickname" class="form-control">
+</p>
+<p>
+  <span>Title:</span>
+  <input type="texto" formControlName="title" class="form-control">
+</p>
+<p>
+  <span>Content:</span>
+  <input type="text" formControlName="content" class="form-control">
+</p>
+<p>
+  <span>User:</span>
+  <select formControlName="user">
+    <option *ngFor="let user of users" value="{{user.id}}">{{user.rol}}</option>
+  </select>
+</p>
+<p>
+  <button (click)="this.newPost()">Guardar</button>
+</p>
+<hr>
+<table>
+<thead>
+<tr>
+<th>Author</th>
+<th>Nickname</th>
+<th>Title</th>
+<th>Content</th>
+<th>User</th>
+</thead>
+<tbody>
+<tr *ngFor= "let post of posts">
+<tbody>{{post.author}}</tbody>
+<td>{{post.nickname}}</td>
+<td>{{post.title}}</td>
+<td>{{post.content}}</td>
+<td>{{post.user}}</td>
+<tbody>
+</table>
+</form>

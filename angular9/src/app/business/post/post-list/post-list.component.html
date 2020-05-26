@@ -1,0 +1,15 @@
+<p>post-list works!</p>
+<h2>
+  Listado clientes
+</h2>
+<div *ngIf="!post.length">No hay post por el momento</div>
+<div>
+  <article *ngFor="let post of posts">
+    <span>{{post.author}}</span>
+    <span>{{post.nickname}}</span>
+    <span>{{post.title}}</span>
+    <span>{{post.content}}</span>
+    <span>{{post.user}}</span>
+
+  </article>
+</div>
