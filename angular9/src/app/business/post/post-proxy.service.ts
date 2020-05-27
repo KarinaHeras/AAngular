@@ -8,7 +8,7 @@ import { PostDto } from './post.dto';
   providedIn: 'root'
 })
 export class PostProxyService {
-  private URL = 'http//localhost:3001/api';
+  private URL = 'http://localhost:3000';
 
   constructor(private httpClient: HttpClient) { }
 
@@ -17,20 +17,20 @@ export class PostProxyService {
 getAllPost(): Observable<PostDto[]>{
   return this.httpClient.get<PostDto[]>(this.URL + '/posts');
 }
-  getUsers(){
-    return this.httpClient.get(this.URL + './posts')
-      .subscribe(res => {
-        console.log(res);
-      });
-  }
+//   getUsers(){
+//     return this.httpClient.get(this.URL + './post')
+//       .subscribe(res => {
+//         console.log(res);
+//       });
+//   }
 
-getPosts(): Observable<any> {
-    return this.httpClient.get(this.URL + './posts');
-  }
+// getPosts(): Observable<any> {
+//     return this.httpClient.get(this.URL + './post');
+//   }
 
 
 newPost(): Observable<any>{
-    return this.httpClient.get(this.URL + './posts');
+    return this.httpClient.get(this.URL + './post');
   }
 
 

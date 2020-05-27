@@ -4,7 +4,7 @@ import { map } from 'rxjs/operators';
 import { PostProxyService } from './post-proxy.service';
 import { PostDto } from './post.dto';
 import { Post, User } from './post.model';
-@Injectable()
+@Injectable({providedIn: 'root'})
 export class PostService {
 
   private posts: Post[];
@@ -12,24 +12,24 @@ export class PostService {
 
 
   constructor(private proxyServi: PostProxyService) {
-    this.users = [
-      {
-        id: 0,
-        rol: 'Anonimo'
-      },
-      {
-        id: 1,
-        rol: 'Admin'
-      },
-      {
-        id: 2,
-        rol: 'publisher'
-      }
-    ];
-    this.posts = [];
-  }
+  //   this.users = [
+  //     {
+  //       id: 0,
+  //       rol: 'Anonimo'
+  //     },
+  //     {
+  //       id: 1,
+  //       rol: 'Admin'
+  //     },
+  //     {
+  //       id: 2,
+  //       rol: 'publisher'
+  //     }
+  //   ];
+  //   this.posts = [];
+   }
 
-  getAllPost(): Observable<Post[]>{
+  getAllPost(): Observable < Post[] > {
     return this.proxyServi.getAllPost().pipe(
       map((postsDto: PostDto[]) => {
         let posts: Post[] = [];
@@ -38,9 +38,9 @@ export class PostService {
             _id: postDto._id,
             title: postDto.title,
             content: postDto.content,
-            author: postDto.nameAuthor,
+            nameAuthor: postDto.nameAuthor,
             nickname: postDto.nameAuthor,
-            user: 0
+            // user: 0
 
           };
           posts = [... posts, post];
@@ -52,24 +52,24 @@ export class PostService {
 
 
   }
-  getUsers(){
-    return this.users;
+//   getUsers(){
+//     return this.users;
 
-  }
-getPosts() {
-    return this.posts;
-  }
+//   }
+// getPosts() {
+//     return this.posts;
+//   }
 
 
-newPost(): Post {
-    return {
-      _id: '',
-      author: '',
-      nickname: '',
-      title: '',
-      content: '',
-      user: 0
-    };
-  }
-  }
+// newPost(): Post {
+//     return {
+//       _id: '',
+//       author: '',
+//       nickname: '',
+//       title: '',
+//       content: '',
+//       user: 0
+//     };
+//   }
+   }
 

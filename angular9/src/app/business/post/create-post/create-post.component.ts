@@ -41,7 +41,7 @@ export class CreatePostComponent implements OnInit {
     //     console.log(this.post);
 
     //   });
-     this.users = this.postService.getUsers();
+     // this.users = this.postService.getUsers();
   }
 
 
