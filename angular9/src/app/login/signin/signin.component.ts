@@ -8,25 +8,25 @@ import { AuthService } from 'src/app/service/auth.service';
   styleUrls: ['./signin.component.css']
 })
 export class SigninComponent implements OnInit {
- user: any;
+  user = {
+    username: '',
+    password: '',
+  };
   constructor(private authservice: AuthService, private router: Router) { }
 
   ngOnInit(): void {
-    this.user = {
-      username: 'admin1',
-      password: '4321',
-    };
-    console.log(this.user);
+
+
   }
 
-
-  signIn(){
-    this.authservice.signIn(this.user)
-     .subscribe(
-       res => {
-          console.log(res);
-       },
-       err => console.log(err)
-     );
-   }
+signIn(){
+  this.authservice.signIn(this.user)
+   .subscribe(
+     res => {
+       localStorage.setItem('token', res.token);
+       this.router.navigate(['/private']);
+     },
+     err => console.log(err)
+   );
+ }
 }

@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 
@@ -10,21 +10,27 @@ export class AuthService {
 
   constructor(private http: HttpClient, private router: Router) { }
 
-
-
-  // metodo para
-  signUp(user){
-     console.log('soy user', user);
-     return this.http.post<any>('http://localhost:3000/users', user);
-
-
-  }
-
+// metodo login
   signIn(user){
-    console.log('userAuth-Service', user);
-    return this.http.post<any>(this.URL2 + '/login', user);
+    const basicAuth  = btoa(`${user.username}:${user.password}`);
+   // console.log('basicCCCCC', basicAuth);
+    const httpOptions = { headers: new HttpHeaders({Authorization: 'Basic ' + basicAuth }) };
+   // return this.httpClient.post<any>
+   // console.log('userAuth-Service', user);
+    return this.http.post<any>(this.URL2 + '/login', {}, httpOptions);
+  }
+
+
+  // metodo para registro
+  signUp(user){
+    const basicAuth  = btoa(`${user.username}:${user.password}`);
+    const httpOptions = { headers: new HttpHeaders({Authorization: 'Basic ' + basicAuth }) };
+    // console.log('soy user', user);
+    return this.http.post<any>('http://localhost:3000/users', {}, httpOptions);
 
   }
+
+
   // metodo para saber si el usuario esta logeado
   loggedIn(){
     return !!localStorage.getItem('token');

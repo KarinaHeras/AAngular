@@ -4,6 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule, Routes } from '@angular/router';
 import { AppComponent } from './app.component';
+import { AuthGuard } from './auth.guard';
 import { PostModule } from './business/post/post.module';
 import { PrivateRegistryComponent } from './login/private-registry/private-registry.component';
 import { RegistryComponent } from './login/registry/registry.component';
@@ -40,7 +41,7 @@ const ROUTES: Routes = [
 
     RouterModule.forRoot(ROUTES)
   ],
-  providers: [],
+  providers: [AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
