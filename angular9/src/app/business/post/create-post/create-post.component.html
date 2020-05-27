@@ -1,11 +1,11 @@
 
-<!--<p>create-post works!</p>
+<p>create-post works!</p>
 
-<form [formGroup]=" formularioPost">
+<!--<form [formGroup]="formularioPost">
 <h2>Craer Post</h2>
 <p>
   <span>Author:</span>
-  <input type="text" formControlName="author" class="form-control">
+  <input type="text" formControlName="nameAuthor" class="form-control">
 </p>
 <p>
   <span>Nickname:</span>
@@ -28,8 +28,24 @@
 <p>
   <button (click)="this.newPost()">Guardar</button>
 </p>
+author
+ <select formControlName="user">
+    <option *ngFor="let user of users" value="{{user.id}}">{{user.rol}}</option>
+  </select>
+  nickname
+   <select formControlName="user">
+    <option *ngFor="let user of users" value="{{user.id}}">{{user.rol}}</option>
+  </select>
+  Title
+   <select formControlName="user">
+    <option *ngFor="let user of users" value="{{user.id}}">{{user.rol}}</option>
+  </select>
+  Content
+   <select formControlName="user">
+    <option *ngFor="let user of users" value="{{user.id}}">{{user.rol}}</option>
+  </select>
 <hr>
-<table>
+<!--<table>
 <thead>
 <tr>
 <th>Author</th>
@@ -47,4 +63,4 @@
 <td>{{post.user}}</td>
 <tbody>
 </table>
-</form> -->
+</form>-->

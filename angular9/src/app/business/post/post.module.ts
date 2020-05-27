@@ -7,8 +7,10 @@ import { CreatePostComponent } from './create-post/create-post.component';
 import { PostListComponent } from './post-list/post-list.component';
 
 const routes: Routes = [
-  { path: '', component: PostListComponent}
+  { path: '', component: PostListComponent},
+  { path: '', component: CreatePostComponent}
 ];
+
 @NgModule({
   declarations: [CreatePostComponent, PostListComponent],
   imports: [
