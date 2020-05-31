@@ -1,6 +1,32 @@
 
 <p>create-post works!</p>
 
+<div class="card bg-secondary text-white">
+  <div class="card-body">
+    <h4 class="card-title">{{post.title}}</h4>
+    <h5 class="card-text">{{post.nameAuthor|currency:'INR'}}</h5>
+  </div>
+  <table class="table">
+    <tr>
+      <td scope="row">
+        <b>Post Type</b>
+      </td>
+
+    </tr>
+    <tr>
+      <td scope="row">
+        <b>comentario</b>
+      </td>
+      <td>{{post.content}}</td>
+    </tr>
+  </table>
+  <div class="card-footer text-muted">
+    <button type="button" class="btn btn-light" [routerLink]="['/posts',post.id]" >Detail</button>
+    <button type="button" class="btn btn-danger" (click)="delete()" >Remove</button>
+  </div>
+</div>
+
+
 <!--<form [formGroup]="formularioPost">
 <h2>Craer Post</h2>
 <p>

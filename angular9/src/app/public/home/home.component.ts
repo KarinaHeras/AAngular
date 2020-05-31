@@ -15,7 +15,7 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
 
     // llamo al servicio y el sevicio llama al back
-     this.posts = this.service.getAllPost();
+     // *this.posts = this.service.getAllPost();
     //  .subscribe(res => {
     //     this.posts = res;
     //     console.log(this.posts);

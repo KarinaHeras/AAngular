@@ -41,15 +41,16 @@ export class AuthService {
   }
 
   // // este metodo retornar el token que se ha guardado
-  // getToken(){
-  //   return localStorage.getItem('token');
+  getToken(){
+     return localStorage.getItem('token');
 
-  // }
+   }
   // // cerrar sesion, elimina el token y asi elimina los datos del usuario
   // logout(){
   //   localStorage.removeItem('token');
   //   return this.router.navigate(['/signin']);
   // }
 
+  }
 
-}
+

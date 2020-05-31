@@ -1,4 +1,4 @@
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
@@ -6,12 +6,16 @@ import { RouterModule, Routes } from '@angular/router';
 import { AppComponent } from './app.component';
 import { AuthGuard } from './auth.guard';
 import { PostModule } from './business/post/post.module';
+import { PostsComponent } from './business/posts/posts.component';
 import { PrivateRegistryComponent } from './login/private-registry/private-registry.component';
 import { RegistryComponent } from './login/registry/registry.component';
 import { SigninComponent } from './login/signin/signin.component';
 import { SignupComponent } from './login/signup/signup.component';
 import { HomeModule } from './public/home.module';
 import { HomeComponent } from './public/home/home.component';
+import { TokenInterceptorService } from './service/token-interceptor.service';
+import { AddPostTemplateComponent } from './business/add-post-template/add-post-template.component';
+import { AddPostModelComponent } from './business/add-post-model/add-post-model.component';
 
 const ROUTES: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -26,6 +30,9 @@ const ROUTES: Routes = [
     SigninComponent,
     RegistryComponent,
     PrivateRegistryComponent,
+    PostsComponent,
+    AddPostTemplateComponent,
+    AddPostModelComponent
 
 
   ],
@@ -39,9 +46,17 @@ const ROUTES: Routes = [
     PostModule,
     FormsModule,
 
+
+
     RouterModule.forRoot(ROUTES)
   ],
-  providers: [AuthGuard],
+  providers: [AuthGuard,
+  {
+    provide: HTTP_INTERCEPTORS,
+    useClass: TokenInterceptorService,
+    multi: true
+
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

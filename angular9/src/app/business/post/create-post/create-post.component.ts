@@ -1,8 +1,5 @@
-import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
-import { Post, User } from '../post.model';
-import { PostService } from '../post.service';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Post } from '../post.model';
 
 @Component({
   selector: 'app-create-post',
@@ -11,55 +8,30 @@ import { PostService } from '../post.service';
 })
 export class CreatePostComponent implements OnInit {
 
-  formularioPost = new FormGroup ({
-    author: new FormControl(''),
-    nickname: new FormControl(''),
-    title: new FormControl(''),
-    content: new FormControl(''),
-    user: new FormControl('')
+  @Input() post: Post;
+  @Output() removed = new EventEmitter<Post>();
 
-
-
-  });
-
-
-
-  constructor( private postService: PostService, private httpClient: HttpClient) { }
-
-  // BakenURL = 'http//localhost:3001/api';
-
-  private post: Post;
-  private users: User[];
-
-
-
+  constructor() { }
 
   ngOnInit() {
-    //  this.httpClient.get(`${this.BakenURL}/post`)
-    //   .subscribe(res => {
-    //     this.post = res;
-    //     console.log(this.post);
+  }
 
-    //   });
-     // this.users = this.postService.getUsers();
+
+  delete() {
+    this.removed.emit(this.post);
+  }
+
   }
 
 
   // savePost(){
-  //   this.httpClient.post(`${this.BakenURL}/post`, this.post)
+  //   this.httpClient.post(`${this.URL}/post`, this.post)
   //     .subscribe((res: any) => {
   //       console.log(res);
   //       this.post.push(res.savePost);
   //     });
   // }
 
-// metodo para guardar el fromControl, asi parametrisamos el formulario
-newPost(){
-  console.log(this.formularioPost.value);
-
-}
-
-  }
 
 
 

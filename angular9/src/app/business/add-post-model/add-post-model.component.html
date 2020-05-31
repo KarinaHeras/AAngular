@@ -1,0 +1,64 @@
+<p>add-post-model works!</p>
+<div class="card">
+  <div class="card-body">
+    <h4 class="card-title">ADD Post (Template Driven Form)</h4>
+
+    <div class="alert alert-info alert-dismissible " role="alert" *ngIf="formSubmitted">
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+        <span class="sr-only">Close</span>
+      </button>
+      <strong>Bingo !!! Formulario enviado ...</strong>
+    </div>
+
+    <div class="row">
+      <div class="col-md-6">
+     <form #myForm="ngForm" novalidate>
+          <div class="form-group">
+            <label>Title</label>
+
+            <input type="text" class="form-control" name="title" [(ngModel)]="product.title" required minlength="10" #title="ngModel"
+              [ngClass]="{'is-invalid': title?.errors && (title?.touched || title?.dirty),
+                                              'is-valid':title?.valid}">
+            <div class="invalid-feedback">
+              <strong *ngIf="title?.errors?.required">Título es requerido</strong>
+              <strong *ngIf="title?.errors?.minlength">
+              La longitud del título debe ser mayor {{title?.errors?.minlength.requiredLength}} character. {{title?.errors?.minlength.requiredLength
+                - title?.errors?.minlength.actualLength}} Se requiere más carácteres
+              </strong>
+            </div>
+          <div class="form-group ">
+            <label>Name Author</label>
+            <input type="text" class="form-control" name="nameAuthor" [(ngModel)]="post.nameAuthor">
+          </div>
+           <div class="form-group">
+            <label>Title</label>
+            <input type="text" class="form-control" name="title" [(ngModel)]="post.title">
+          </div>
+              <strong>Solo se permiten letras.</strong>
+            <div class="form-group ">
+              <label>lista Post</label>
+              <select class="form-control" name="listaPost" [(ngModel)]="post.listaPOst" required #listaPost="ngModel"
+                [ngClass]="{'is-invalid': listaPost.errors && (listaPost.touched || listaPost.dirty), 'is-valid':listaPost.valid}">
+                <option *ngFor="let p of listaPost" [value]="p">{{p}}</option>
+              </select>
+              <div class="invalid-feedback">
+                <strong>elegir el post.</strong>
+              </div>
+            <div class="form-group">
+              <label>titulo</label>
+              <input type="text" class="form-control" name="title" [(ngModel)]="post.title" #title="ngModel" required [ngClass]="{'is-invalid': title.errors && (title.touched || title.dirty), 'is-valid':title.valid}">
+              <div class="invalid-feedback">
+                <strong>titulo del post obligatorio.</strong>
+              </div>
+            <button type="submit" class="btn btn-primary" (click)="addProduct()" [disabled]="myForm.invalid">Submit</button>
+            <button class="btn btn-default" (click)="myForm.reset()">Reset</button>
+
+        </div>
+        <div class="col-md-6">
+          <label>
+            <strong>myForm : JSON</strong>
+          </label>
+          <pre class="alert alert-dark">{{myForm.value | json}}</pre>
+        </div>
+

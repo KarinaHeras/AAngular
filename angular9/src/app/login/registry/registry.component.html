@@ -1,1 +1,12 @@
-<p>registry works!</p>
+<p>registro</p>
+
+<div class="row">
+    <div class="col-md-4" *ngFor="let registry of registrys">
+        <div class="card">
+            <div class="card-b">
+                <h3>{{registry.nameAuthor}}</h3>
+                <p>{{registry.title}}</p>
+            </div>
+        </div>
+    </div>
+</div>

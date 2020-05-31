@@ -17,21 +17,16 @@ export class PostProxyService {
 getAllPost(): Observable<PostDto[]>{
   return this.httpClient.get<PostDto[]>(this.URL + '/posts');
 }
-//   getUsers(){
-//     return this.httpClient.get(this.URL + './post')
-//       .subscribe(res => {
-//         console.log(res);
-//       });
-//   }
-
-// getPosts(): Observable<any> {
-//     return this.httpClient.get(this.URL + './post');
-//   }
-
-
-newPost(): Observable<any>{
-    return this.httpClient.get(this.URL + './post');
+  getPost(postId: number): Observable<PostDto> {
+  return this.httpClient.get<PostDto>(`${this.URL}/${postId}`);
   }
-
-
+  post$(post: PostDto): Observable<PostDto> {
+  return this.httpClient.post<PostDto>(this.URL, { post });
+  }
+  patch$(postId: number, post: PostDto): Observable<PostDto> {
+  return this.httpClient.patch<PostDto>(`${this.URL}/${postId}`, { post });
+  }
+  delete$(postId: number): Observable<PostDto> {
+  return this.httpClient.delete<PostDto>(`${this.URL}/${postId}`);
+  }
 }
