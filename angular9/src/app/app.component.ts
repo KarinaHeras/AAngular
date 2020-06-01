@@ -6,7 +6,17 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'angular9';
 
 
+  // constructor(private notificacionesBus: NotificacionesBusService) { }
+
+  // ngOnInit() {
+  //      this.notificacionesSub =
+  //      this.notificacionesBus.getNotificacion().subscribe(
+  //         (notificacion: Notificacion) => {
+  //             this.msgs = [];
+  //             this.msgs.push(notificacion);
+  //          }
+  //       );
+  // }
 }

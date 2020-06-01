@@ -3,10 +3,16 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule, Routes } from '@angular/router';
+import { ButtonModule } from 'primeng/button';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { DialogModule } from 'primeng/dialog';
+import { InputTextModule } from 'primeng/inputtext';
+import { MenubarModule } from 'primeng/menubar';
+import { PanelModule } from 'primeng/panel';
+import { ToastModule } from 'primeng/toast';
 import { AppComponent } from './app.component';
 import { AuthGuard } from './auth.guard';
 import { PostModule } from './business/post/post.module';
-import { PostsComponent } from './business/posts/posts.component';
 import { PrivateRegistryComponent } from './login/private-registry/private-registry.component';
 import { RegistryComponent } from './login/registry/registry.component';
 import { SigninComponent } from './login/signin/signin.component';
@@ -14,8 +20,7 @@ import { SignupComponent } from './login/signup/signup.component';
 import { HomeModule } from './public/home.module';
 import { HomeComponent } from './public/home/home.component';
 import { TokenInterceptorService } from './service/token-interceptor.service';
-import { AddPostTemplateComponent } from './business/add-post-template/add-post-template.component';
-import { AddPostModelComponent } from './business/add-post-model/add-post-model.component';
+
 
 const ROUTES: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -30,9 +35,6 @@ const ROUTES: Routes = [
     SigninComponent,
     RegistryComponent,
     PrivateRegistryComponent,
-    PostsComponent,
-    AddPostTemplateComponent,
-    AddPostModelComponent
 
 
   ],
@@ -45,8 +47,13 @@ const ROUTES: Routes = [
     HomeModule,
     PostModule,
     FormsModule,
-
-
+    PanelModule,
+    MenubarModule,
+    DialogModule,
+    InputTextModule,
+    ButtonModule,
+    ToastModule,
+    ConfirmDialogModule,
 
     RouterModule.forRoot(ROUTES)
   ],
@@ -54,7 +61,9 @@ const ROUTES: Routes = [
   {
     provide: HTTP_INTERCEPTORS,
     useClass: TokenInterceptorService,
-    multi: true
+    multi: true,
+   // MessageService,
+    // ConfirmationService
 
   }],
   bootstrap: [AppComponent]

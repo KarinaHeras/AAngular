@@ -23,13 +23,13 @@ export class PostsStores extends Store<Post[]>{
 
 // aqui le añadimos los post que tenemos en  memoria
 //
-create(post: Post): Promise<Post> {
-  return this.service.createPost(post).pipe(
-  tap(newPost => {
-  this.store([newPost, ...this.get()]);
-          })
-      ).toPromise();
-  }
+// createPost(post: Post): Promise<Post> {
+//   return this.service.createPost(post).pipe(
+//   tap(newPost => {
+//   this.store([newPost, ...this.get()]);
+//           })
+//       ).toPromise();
+//   }
 
 
     create$(post: Post): Promise<Post> {
