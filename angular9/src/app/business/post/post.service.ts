@@ -1,28 +1,65 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { Post } from './post.model';
+import { Observable, throwError } from 'rxjs';
+import { catchError } from 'rxjs/operators';
+import { Post } from '../Model/post.model';
 
 @Injectable({providedIn: 'root'})
 export class PostService {
 
-  private URL = 'http://localhost:3000';
+  readonly URL = 'http://localhost:3000';
 
-  constructor(private http: HttpClient) { }
+  httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json'
+    })
+  };
 
+  constructor(private httpClient: HttpClient) { }
 
-  getAll(): Observable<any>{
-    return this.http.get(this.URL + '/all');
+  getAll(): Observable<Post[]> {
+    return this.httpClient.get<Post[]>(this.URL + '/posts/')
+    .pipe(
+      catchError(this.errorHandler)
+    );
   }
 
-  addPost(post: Post): Observable<any>{
-    let headers = new HttpHeaders();
-    headers = headers.set('Content-Type', 'application/json');
-    return this.http.post(this.URL + '/save', JSON.stringify(post), {headers});
+  create(post): Observable<Post> {
+    return this.httpClient.post<Post>(this.URL + '/posts/', JSON.stringify(post), this.httpOptions)
+    .pipe(
+      catchError(this.errorHandler)
+    );
   }
 
-  deletePost(id: number): Observable<any>{
-    return this.http.get(this.URL + '/delete/' + id);
+  find(id): Observable<Post> {
+    return this.httpClient.get<Post>(this.URL + '/posts/' + id)
+    .pipe(
+      catchError(this.errorHandler)
+    );
   }
+
+  update(id, post): Observable<Post> {
+    return this.httpClient.put<Post>(this.URL + '/posts/' + id, JSON.stringify(post), this.httpOptions)
+    .pipe(
+      catchError(this.errorHandler)
+    );
+  }
+
+  delete(id){
+    return this.httpClient.delete<Post>(this.URL + '/posts/' + id, this.httpOptions)
+    .pipe(
+      catchError(this.errorHandler)
+    );
+  }
+
+
+  errorHandler(error) {
+    let errorMessage = '';
+    if (error.error instanceof ErrorEvent) {
+      errorMessage = error.error.message;
+    } else {
+      errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
+    }
+    return throwError(errorMessage);
+ }
 }
-

@@ -2,7 +2,6 @@ import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AutoCompleteModule } from 'primeng/autocomplete';
 import { AuthGuard } from '../auth.guard';
 import { PrivateRegistryComponent } from '../login/private-registry/private-registry.component';
 import { RegistryComponent } from '../login/registry/registry.component';
@@ -28,7 +27,6 @@ const ROUTES: Routes = [
   imports: [
     CommonModule,
     HttpClientModule,
-    AutoCompleteModule,
 
     RouterModule.forChild(ROUTES)
   ],

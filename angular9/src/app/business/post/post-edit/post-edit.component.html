@@ -1,8 +1,6 @@
-
-<p>create-post works!</p>
-
+<p>post-edit works!</p>
 <div class="container">
-    <h1>Crea un nuevo Post</h1>
+    <h1>Actulizar Post</h1>
 
     <a href="#" routerLink="/post/index" class="btn btn-primary">Back</a>
 
@@ -14,6 +12,7 @@
                 formControlName="title"
                 id="title"
                 type="text"
+                [(ngModel)]="post.title"
                 class="form-control">
             <div *ngIf="f.title.touched && f.title.invalid" class="alert alert-danger">
                 <div *ngIf="f.title.errors.required">Title is required.</div>
@@ -26,6 +25,7 @@
                 formControlName="body"
                 id="body"
                 type="text"
+                [(ngModel)]="post.body"
                 class="form-control">
             </textarea>
             <div *ngIf="f.body.touched && f.body.invalid" class="alert alert-danger">
@@ -33,8 +33,6 @@
             </div>
         </div>
 
-        <button class="btn btn-primary" type="submit" [disabled]="!form.valid">Submit</button>
+        <button class="btn btn-primary" type="submit" [disabled]="!form.valid">Update</button>
     </form>
 </div>
-
-

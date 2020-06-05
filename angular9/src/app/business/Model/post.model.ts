@@ -1,10 +1,12 @@
 
 export interface Post {
-  id: string;
+
+  _id: string;
   nameAuthor: string;
   nickname: string;
   title: string;
   content: string;
+  comments?: string;
   // user: number;
 
 

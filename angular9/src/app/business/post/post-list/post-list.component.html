@@ -1,69 +1,56 @@
-<div class="ui-g">
-    <p-toast></p-toast>
-    <p-confirmDialog header="Confirmación" acceptLabel="Si" rejectLabel="No" icon="pi pi-exclamation-triangle"></p-confirmDialog>
-    <p-panel header="Administración de Posts" [style]="{width: '70%', margin: '0 auto'}">
-        <div style="margin-bottom: 20px">
-            <p-menubar [model]="items"></p-menubar>
-        </div>
-        <p-table [value]="posts" [columns]="cols" [responsive]="true" selectionMode="single" [(selection)]="selectedPost"
-            dataKey="id" [paginator]="true" [rows]="15">
-            <ng-template pTemplate="header" let-columns>
-                <tr>
-                    <th *ngFor="let col of columns" [pSortableColumn]="col.field">
-                        {{col.header}}
-                        <p-sortIcon [field]="col.field" ariaLabel="Activate to sort" ariaLabelDesc="Activate to sort in descending order" ariaLabelAsc="Activate to sort in ascending order"></p-sortIcon>
-                    </th>
-                </tr>
-            </ng-template>
-            <ng-template pTemplate="body" let-post let-columns="columns">
-                <tr [pSelectableRow]="post">
-                    <td *ngFor="let col of columns">
-                        {{post[col.field]}}
-                    </td>
-                </tr>
-            </ng-template>
-        </p-table>
-    </p-panel>
-    <p-dialog header="Post" [responsive]="true" [style]="{width: '400px'}" [(visible)]="displaySaveDialog"
-        [modal]="true">
-        <div class="ui-g ui-fluid">
-            <div class="ui-g-12">
-                <div class="ui-g-4">
-                    <label for="nombre">Nombre Author</label>
-                </div>
-                <div class="ui-g-8">
-                    <input pInputText id="nameAuthor" [(ngModel)]="post.nameAuthor" />
-                </div>
-            </div>
-            <div class="ui-g-12">
-                <div class="ui-g-4">
-                    <label for="title">Nickname</label>
-                </div>
-                <div class="ui-g-8">
-                    <input pInputText id="nickname" [(ngModel)]="post.nickname" />
-                </div>
-            </div>
-            <div class="ui-g-12">
-                <div class="ui-g-4">
-                    <label for="title">Titulo</label>
-                </div>
-                <div class="ui-g-8">
-                    <input pInputText id="title" [(ngModel)]="post.title" />
-                </div>
-            </div>
-            <div class="ui-g-12">
-                <div class="ui-g-4">
-                    <label for="content">Comentario</label>
-                </div>
-                <div class="ui-g-8">
-                    <input pInputText id="content" [(ngModel)]="post.content" />
-                </div>
-            </div>
-        </div>
-        <p-footer>
-            <div class="ui-dialog-buttonpane ui-helper-clearfix">
-                <button type="button" pButton icon="pi pi-check" (click)="save()" label="Guardar"></button>
-            </div>
-        </p-footer>
-    </p-dialog>
-</div>
+<div class="container">
+    <h1>Angular CRUD Example - ItSolutionStuff.com</h1>
+
+    <a href="#" routerLink="/post/create/" class="btn btn-success">Create New Post</a>
+
+    <table class="table table-bordered">
+      <tr>
+        <th>ID</th>
+        <th>Title</th>
+        <th>Body</th>
+        <th width="220px">Action</th>
+      </tr>
+      <tr *ngFor="let post of posts">
+        <td>{{ post.id }}</td>
+        <td>{{ post.title }}</td>
+        <td>{{ post.body }}</td>
+        <td>
+          <a href="#" [routerLink]="['/post/', post.id, 'view']" class="btn btn-info">View</a>
+          <a href="#" [routerLink]="['/post/', post.id, 'edit']" class="btn btn-primary">Edit</a>
+          <button type="button" (click)="deletePost(post.id)" class="btn btn-danger">Delete</button>
+        </td>
+      </tr>
+    </table>
+ </div>
+
+
+
+
+
+
+<!-------- aqui         ------------------------>
+<!--<h4>{{(getPost|async)?.title}}</h4>
+<p>{{(getPost|async)?.content}}</p>
+<p>{{(getPost|async)?.nickname}}</p>
+<ul>Comments:
+    <div *ngIf="(getPost|async)?.comments?.length>0; then ok else error"></div>
+    <ng-template #ok>
+        <li *ngFor="let comment of (getPost|async)?.comments">
+            <p>{{comment?.comment}}</p>
+            <p>{{comment?.nickname}}</p>
+            <button (click)="showForm(comment?._id)">Edit</button>
+            <button (click)="deleteComment(comment?._id)">Delete</button>
+        </li>
+    </ng-template>
+    <ng-template #error>No hay comentarios</ng-template>
+</ul>
+<button (click)="showForm('')">Public comment</button>
+<br>
+<br>
+<div *ngIf="show">
+    <form [formGroup]="createComment">
+        Comment: <input type="text" formControlName="comment">
+        Nickname: <input type="text" formControlName="nickname">
+        <button (click)="handleComment()" [disabled]="!createComment.valid">Share</button>
+    </form>
+</div>-->
