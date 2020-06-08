@@ -2,12 +2,12 @@
 <div class="container">
     <h1>Actulizar Post</h1>
 
-    <a href="#" routerLink="/post/index" class="btn btn-primary">Back</a>
+    <a href="#" routerLink="/post/index" class="btn btn-primary">Volver</a>
 
     <form [formGroup]="form" (ngSubmit)="submit()">
 
         <div class="form-group">
-            <label for="title">Title:</label>
+            <label for="title">Titulo:</label>
             <input
                 formControlName="title"
                 id="title"
@@ -15,24 +15,24 @@
                 [(ngModel)]="post.title"
                 class="form-control">
             <div *ngIf="f.title.touched && f.title.invalid" class="alert alert-danger">
-                <div *ngIf="f.title.errors.required">Title is required.</div>
+                <div *ngIf="f.title.errors.required">El titulo es necesario.</div>
             </div>
         </div>
 
         <div class="form-group">
-            <label for="body">Body</label>
+            <label for="content">Descripcion</label>
             <textarea
-                formControlName="body"
-                id="body"
+                formControlName="content"
+                id="content"
                 type="text"
-                [(ngModel)]="post.body"
+                [(ngModel)]="post.content"
                 class="form-control">
             </textarea>
-            <div *ngIf="f.body.touched && f.body.invalid" class="alert alert-danger">
-                <div *ngIf="f.body.errors.required">Body is required.</div>
+            <div *ngIf="f.content.touched && f.content.invalid" class="alert alert-danger">
+                <div *ngIf="f.content.errors.required">El contenido es necesario.</div>
             </div>
         </div>
 
-        <button class="btn btn-primary" type="submit" [disabled]="!form.valid">Update</button>
+        <button class="btn btn-primary" type="submit" [disabled]="!form.valid">Actualizar</button>
     </form>
 </div>

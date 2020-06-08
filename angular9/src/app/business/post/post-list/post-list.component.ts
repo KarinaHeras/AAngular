@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs/internal/Observable';
 import { Post } from '../../Model/post.model';
 import { PostService } from '../post.service';
 @Component({
@@ -7,7 +8,8 @@ import { PostService } from '../post.service';
   styleUrls: ['./post-list.component.css']
 })
 export class PostListComponent implements OnInit {
-
+  publicPost$: Observable<string>;
+  protectedPost$: Observable<string>;
 
   // si el formulario existe refresca
   posts: Post[] = [];
@@ -15,16 +17,22 @@ export class PostListComponent implements OnInit {
   constructor(public postService: PostService) { }
 
   ngOnInit(): void {
+    this.publicPost$ = this.postService.getPublicPost();
+    this.protectedPost$ = this.postService.getProtectedPost();
+
     this.postService.getAll().subscribe((data: Post[]) => {
       this.posts = data;
       console.log(this.posts);
     });
   }
 
-  deletePost(id){
-    this.postService.delete(id).subscribe(res => {
-         this.posts = this.posts.filter(item => item.id !== id);
-         console.log('Post deleted successfully!');
+  deletePost(_id){
+    console.log(' NOOOOOOOO--------llego al subcribe');
+
+    this.postService.deletePost(_id).subscribe(res => {
+      console.log('------------llego al subcribe');
+      this.posts = this.posts.filter(item => item._id !== _id);
+      console.log('Post deleted!');
     });
   }
 

@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthProxyService } from '../login/auth-proxy.service';
 
 @Injectable({
   providedIn: 'root'
@@ -8,7 +9,7 @@ import { Router } from '@angular/router';
 export class AuthService {
   private URL2 = 'http://localhost:3000/auth';
 
-  constructor(private http: HttpClient, private router: Router) { }
+  constructor(private http: HttpClient, private router: Router, private proxy: AuthProxyService) { }
 
 // metodo login
   signIn(user){
@@ -20,7 +21,12 @@ export class AuthService {
     return this.http.post<any>(this.URL2 + '/login', {}, httpOptions);
   }
 
-
+  // signIn(username: string, password: string): void {
+  //   this.proxy.login(username, password).subscribe(
+  //     (tokenDTO: TokenDTO) => localStorage.setItem('token', tokenDTO.access_token),
+  //     (error) => console.log(error)
+  //   );
+  // }
   // metodo para registro
   signUp(user){
     const basicAuth  = btoa(`${user.username}:${user.password}`);
@@ -33,7 +39,9 @@ export class AuthService {
 
   // metodo para saber si el usuario esta logeado
   loggedIn(){
+    console.log('don pepeitoooooooooo', localStorage.getItem('token'));
     return !!localStorage.getItem('token');
+
     // if (localStorage.getItem('token')){
     //   return true;
     // }

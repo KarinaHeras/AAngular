@@ -23,7 +23,7 @@ export class SignupComponent implements OnInit {
      .subscribe(
        res => {
          console.log(res);
-         localStorage.setItem('token', res.token);
+         localStorage.setItem('token', res.access_token);
          this.router.navigate(['/private']);
        },
        err => console.log(err)

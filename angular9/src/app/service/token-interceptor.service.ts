@@ -8,6 +8,7 @@ export class TokenInterceptorService {
 
   constructor(private authservice: AuthService ) { }
 
+
   // para autenticacion se añade a la cabecera
   // el metodo le permite añadir header y luego la utorizacion,
   intercept(req, next){
@@ -19,7 +20,5 @@ export class TokenInterceptorService {
    return next.handle(tokenizeReq);
 // el handle añade una cabecera en cada peticion
   }
-
-
 
 }

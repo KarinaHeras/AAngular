@@ -5,6 +5,9 @@ import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule, Routes } from '@angular/router';
 import { AppComponent } from './app.component';
 import { AuthGuard } from './auth.guard';
+import { CreatePostComponent } from './business/post/create-post/create-post.component';
+import { PostEditComponent } from './business/post/post-edit/post-edit.component';
+import { PostListComponent } from './business/post/post-list/post-list.component';
 import { PrivateRegistryComponent } from './login/private-registry/private-registry.component';
 import { RegistryComponent } from './login/registry/registry.component';
 import { SigninComponent } from './login/signin/signin.component';
@@ -26,6 +29,9 @@ const ROUTES: Routes = [
     SigninComponent,
     RegistryComponent,
     PrivateRegistryComponent,
+    PostEditComponent,
+    PostListComponent,
+    CreatePostComponent,
 
   ],
 

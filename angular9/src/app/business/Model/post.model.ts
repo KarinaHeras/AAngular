@@ -1,7 +1,7 @@
 
 export interface Post {
 
-  _id: string;
+  _id?: number;
   nameAuthor: string;
   nickname: string;
   title: string;
