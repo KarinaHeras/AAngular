@@ -1,4 +1,8 @@
 export interface TokenDTO {
   expires_in: number;
-  access_token: string;
+  token: string;
+}
+export interface AuthData {
+  username: string;
+  password: string;
 }

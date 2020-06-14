@@ -10,7 +10,7 @@ export class RegistryComponent implements OnInit {
   constructor( private registry: RegistryService) { }
 
   ngOnInit() {
-//
+
     this.registry.getRegistry()
     .subscribe(
       res => {

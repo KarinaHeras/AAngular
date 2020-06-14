@@ -23,7 +23,7 @@ signIn(){
   this.authservice.signIn(this.user)
    .subscribe(
      res => {
-       localStorage.setItem('token', res.access_token);
+       localStorage.setItem('token', res.token);
        this.router.navigate(['/private']);
      },
      err => console.log(err)

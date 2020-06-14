@@ -23,7 +23,7 @@ export class PostEditComponent implements OnInit {
 
   ngOnInit(): void {
     this.id = this.route.snapshot.params.postId;
-    this.postService.find(this.id).subscribe((data: Post) => {
+    this.postService.findById(this.id).subscribe((data: Post) => {
       this.post = data;
     });
 

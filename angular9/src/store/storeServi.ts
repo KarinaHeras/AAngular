@@ -41,16 +41,16 @@ export class StoreService extends Store<Post[]> {
 
 
     deletePost$(postId: number): Promise<Post> {
-        return this.service.delete(postId).pipe(
+        return this.service.deletePost(postId).pipe(
             tap(() => {
                 const posts = this.get();
-                const newPosts = posts.filter(post => post.id !== postId);
+                const newPosts = posts.filter(post => post._id !== postId);
                 this.store(newPosts);
             })).toPromise();
     }
 
     private searchIndex(posts: Post[], postId: string) {
-        return posts.findIndex(item => item.id === postId);
+        return posts.findIndex(item => item._id === postId);
 
     }
 }

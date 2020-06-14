@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/internal/Observable';
+import { AuthService } from 'src/app/service/auth.service';
 import { Post } from '../../Model/post.model';
 import { PostService } from '../post.service';
 @Component({
@@ -13,8 +14,8 @@ export class PostListComponent implements OnInit {
 
   // si el formulario existe refresca
   posts: Post[] = [];
-
-  constructor(public postService: PostService) { }
+userId: string;
+  constructor(private postService: PostService, private authServi: AuthService) { }
 
   ngOnInit(): void {
     this.publicPost$ = this.postService.getPublicPost();

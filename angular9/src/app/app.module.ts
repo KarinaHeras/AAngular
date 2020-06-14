@@ -1,5 +1,5 @@
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule, Routes } from '@angular/router';
@@ -8,7 +8,7 @@ import { AuthGuard } from './auth.guard';
 import { CreatePostComponent } from './business/post/create-post/create-post.component';
 import { PostEditComponent } from './business/post/post-edit/post-edit.component';
 import { PostListComponent } from './business/post/post-list/post-list.component';
-import { PrivateRegistryComponent } from './login/private-registry/private-registry.component';
+// import { PrivateRegistryComponent } from './login/private-registry/private-registry.component';
 import { RegistryComponent } from './login/registry/registry.component';
 import { SigninComponent } from './login/signin/signin.component';
 import { SignupComponent } from './login/signup/signup.component';
@@ -28,7 +28,7 @@ const ROUTES: Routes = [
     SignupComponent,
     SigninComponent,
     RegistryComponent,
-    PrivateRegistryComponent,
+  //  PrivateRegistryComponent,
     PostEditComponent,
     PostListComponent,
     CreatePostComponent,
@@ -55,6 +55,6 @@ const ROUTES: Routes = [
 
   }],
   bootstrap: [AppComponent],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA],
+  // schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class AppModule { }

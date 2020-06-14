@@ -34,7 +34,7 @@ export class PostService {
     );
   }
 
-  find(id): Observable<Post> {
+  findById(id): Observable<Post> {
     return this.httpClient.get<Post>(this.URL + '/posts/' + id)
     .pipe(
       catchError(this.errorHandler)
@@ -42,7 +42,8 @@ export class PostService {
   }
 
   update(id, post): Observable<Post> {
-    return this.httpClient.put<Post>(this.URL + '/posts/'  + id, JSON.stringify(post), this.httpOptions)
+    const httpOptions = { headers: new HttpHeaders({Authorization: 'Bearer ' +  localStorage.getItem('token')}) };
+    return this.httpClient.put<Post>(this.URL + '/posts/' + id, post, httpOptions)
     .pipe(
       catchError(this.errorHandler)
     );
@@ -69,7 +70,8 @@ export class PostService {
   // }
 
   deletePost(_id){
-    return this.httpClient.delete<Post>(this.URL + '/posts/' + _id, this.httpOptions)
+    const httpOptions = { headers: new HttpHeaders({Authorization: 'Bearer ' +  localStorage.getItem('token')}) };
+    return this.httpClient.delete<Post>(this.URL + '/posts/' + _id, httpOptions)
     .pipe(
       catchError(this.errorHandler)
     );
