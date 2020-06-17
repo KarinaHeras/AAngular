@@ -1,6 +1,8 @@
-import { Component } from '@angular/core';
+ import { Component } from '@angular/core';
+// import { Notificacion } from './notificacion';
+// import { NotificacionesBusService } from './notificaciones-bus.service';
 
-@Component({
+ @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
@@ -8,15 +10,15 @@ import { Component } from '@angular/core';
 export class AppComponent {
 
 
-  // constructor(private notificacionesBus: NotificacionesBusService) { }
+//   constructor(private notificacionesBus: NotificacionesBusService) { }
 
-  // ngOnInit() {
-  //      this.notificacionesSub =
-  //      this.notificacionesBus.getNotificacion().subscribe(
-  //         (notificacion: Notificacion) => {
-  //             this.msgs = [];
-  //             this.msgs.push(notificacion);
-  //          }
-  //       );
-  // }
-}
+//   ngOnInit() {
+//        this.notificacionesSub =
+//        this.notificacionesBus.getNotificacion().subscribe(
+//           (notificacion: Notificacion) => {
+//               this.msgs = [];
+//               this.msgs.push(notificacion);
+//            }
+//         );
+//   }
+ }

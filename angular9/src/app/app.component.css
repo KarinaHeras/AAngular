@@ -1,0 +1,15 @@
+
+
+a {
+  text-decoration: none;
+  color: rgb(12, 127, 235);
+  padding: 7px;
+  margin: 10px;
+  padding-top: 15px;
+  text-align: center;
+}
+
+
+nav {
+  flex: 1 1 auto;
+}

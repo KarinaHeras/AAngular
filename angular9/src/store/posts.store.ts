@@ -3,8 +3,6 @@ import { tap } from 'rxjs/operators';
 import { Post } from 'src/app/business/Model/post.model';
 import { PostService } from 'src/app/business/post/post.service';
 import { Store } from './store';
-// import { tap } from 'rxjs/operators';
-// import { Post } from '../app/business/Model/post.model';
 
  @Injectable({providedIn: 'root'})
 export class PostsStores extends Store<Post[]>{
