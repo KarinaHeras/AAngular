@@ -13,12 +13,14 @@ import { RegistryComponent } from './login/registry/registry.component';
 import { SigninComponent } from './login/signin/signin.component';
 import { SignupComponent } from './login/signup/signup.component';
 import { HomeModule } from './public/home.module';
-import { HomeComponent } from './public/home/home.component';
+import { PostEditCardComponent } from './public/home/post-edit-card/post-edit-card.component';
+import { PostListCardComponent } from './public/home/post-list/post-list-card.component';
 import { TokenInterceptorService } from './service/token-interceptor.service';
+import { ErrorComponent } from './error/error.component';
 
 const ROUTES: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
-  { path: 'home', component:  HomeComponent},
+  { path: 'home', component:  PostListCardComponent},
   { path: '**', redirectTo: 'home' },
 
 ];
@@ -32,6 +34,9 @@ const ROUTES: Routes = [
     PostEditComponent,
     PostListComponent,
     CreatePostComponent,
+    PostEditCardComponent,
+    PostListCardComponent,
+    ErrorComponent
 
   ],
 

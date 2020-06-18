@@ -1,0 +1,43 @@
+:root {
+--font: "Source Sans Pro";
+}
+body {
+
+  font-family: var(--font);
+}
+#welcome {
+  color: rgb(12, 127, 235);
+  padding: 1em;
+  text-align: center;
+}
+.welcome-heading {
+  color: rgb(12, 127, 235);
+  font-size: 3em;
+  text-align: center;
+}
+
+#post:first-child {
+  margin-left: 1%;
+}
+#post:last-child {
+  margin-left: %;
+}
+.post-img {
+  width: 100%;
+  height: auto;
+}
+#content {
+  padding: 1em;
+}
+#welcome a {
+  color: rgb(105, 105, 105);
+  text-decoration: none;
+  margin-left: 0.3em;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-top: 3px;
+}
+#welcome a:hover {
+  border-bottom: 1px solid rgba(175, 175, 175, 0);
+  padding: 2px;
+}

@@ -1,9 +1,8 @@
 <nav>
-  <a [routerLink]="['home']">Home</a>
+    <a [routerLink]="['home']">Home</a>
     <a [routerLink]="['post/list']">Mis Posts</a>
     <a [routerLink]="['/signin']">Login</a>
     <a [routerLink]="['/signup']">signUp</a>
-
-
-<!--<my-component [first]="HOLA SOY STENCILJS" [last]="stencil"></my-component>-->
+</nav>
+<post-card></post-card>
 <router-outlet></router-outlet>

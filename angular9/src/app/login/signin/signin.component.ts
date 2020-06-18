@@ -24,7 +24,7 @@ signIn(){
    .subscribe(
      res => {
        localStorage.setItem('token', res.token);
-       this.router.navigate(['/private']);
+       this.router.navigate(['/post/list']);
      },
      err => console.log(err)
    );

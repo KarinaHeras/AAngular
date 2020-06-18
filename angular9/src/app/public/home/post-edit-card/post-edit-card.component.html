@@ -1,0 +1,9 @@
+<div class="container">
+    <div class="post-edit-card">
+        <post-card>
+            <h4 slot="titulo">{{(getAll$ | async)?.title}}</h4>
+            <p slot="contenido">{{(getAll$ | async)?.content}}</p>
+        </post-card>
+    </div>
+
+</div>
