@@ -16,7 +16,6 @@ import { HomeModule } from './public/home.module';
 import { PostEditCardComponent } from './public/home/post-edit-card/post-edit-card.component';
 import { PostListCardComponent } from './public/home/post-list/post-list-card.component';
 import { TokenInterceptorService } from './service/token-interceptor.service';
-import { ErrorComponent } from './error/error.component';
 
 const ROUTES: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -36,7 +35,6 @@ const ROUTES: Routes = [
     CreatePostComponent,
     PostEditCardComponent,
     PostListCardComponent,
-    ErrorComponent
 
   ],
 

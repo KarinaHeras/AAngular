@@ -1,0 +1,131 @@
+import { Injectable } from '@angular/core';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class PostDetailService {
+
+  constructor(private proxy: BackOfficeProxyService) { }
+
+  getAllPost(): Observable<Post[]> {
+    return this.proxy.getAllPost().pipe(
+      map((postsDTO: PostDTO[]) => {
+        let posts: Post[] = [];
+        postsDTO.forEach((postDTO: PostDTO) => {
+          posts = [...posts, this.adaptPostDTOToModel(postDTO)];
+        });
+        return posts;
+      })
+    );
+  }
+
+  getPostById(id: string): Observable<Post> {
+    return this.proxy.getPostById(id).pipe(
+      map((postDTO: PostDTO) => this.adaptPostDTOToModel(postDTO))
+    );
+  }
+
+  savePost(post: Post): Observable<Post> {
+    return this.proxy.savePost(this.adaptPostModelToDTO(post)).pipe(
+      map((postResult: PostDTO) => this.adaptPostDTOToModel(postResult))
+    );
+  }
+
+  updatePost(id: string, post: Post): Observable<Post> {
+    return this.proxy.updatePost(id, this.adaptPostModelToDTO(post)).pipe(
+      map((postResult: PostDTO) => this.adaptPostDTOToModel(postResult))
+    );
+  }
+
+  deletePost(id: string): Observable<Post> {
+    return this.proxy.deletePost(id).pipe(
+      map(postDTO => this.adaptPostDTOToModel(postDTO))
+    );
+  }
+
+  addComment(id: string, comment: PostDetail): Observable<PostDetail> {
+    return this.proxy.addComment(id, this.adaptPostDetailModelToDTO(comment)).pipe(
+      map((postDetailResult: PostDetailDTO) => this.adaptPostDetailDTOToModel(postDetailResult))
+    );
+  }
+
+  updateComment(id: string, comment: PostDetail): Observable<PostDetail> {
+    return this.proxy.updateComment(id, this.adaptPostDetailModelToDTO(comment)).pipe(
+      map((postDetailResult: PostDetailDTO) => this.adaptPostDetailDTOToModel(postDetailResult))
+    );
+  }
+
+  deleteComment(id: string): Observable<PostDetail> {
+    return this.proxy.deleteComment(id).pipe(
+      map(postDetailDTO => this.adaptPostDetailDTOToModel(postDetailDTO))
+    );
+  }
+
+  createUser(user): Observable<User> {
+    return this.proxy.createUser(this.adaptUserModelToDTO(user)).pipe(
+      map((userResult: UserDTO) => this.adaptUserDTOToModel(userResult))
+    );
+  }
+
+  private adaptPostDTOToModel(postDTO: PostDTO): Post {
+    return {
+      id: postDTO._id,
+      nickname: postDTO.nickname,
+      authorId: postDTO.authorId,
+      title: postDTO.title,
+      content: postDTO.content,
+      comments: postDTO.comments
+    };
+  }
+
+  private adaptPostModelToDTO(post: Post): PostDTO {
+    return {
+      _id: post.id,
+      nickname: post.nickname,
+      authorId: post.authorId,
+      title: post.title,
+      content: post.content,
+      comments: post.comments
+    };
+  }
+
+  private adaptPostDetailDTOToModel(postDetailDTO: PostDetailDTO): PostDetail {
+    return {
+      _id: postDetailDTO._id,
+      authorId: postDetailDTO.authorId,
+      nickname: postDetailDTO.nickname,
+      comment: postDetailDTO.comment,
+      date: postDetailDTO.date
+    };
+  }
+
+  private adaptPostDetailModelToDTO(postDetail: PostDetail): PostDetailDTO {
+    return {
+      _id: postDetail._id,
+      authorId: postDetail.authorId,
+      nickname: postDetail.nickname,
+      comment: postDetail.comment,
+      date: postDetail.date
+    };
+  }
+
+  private adaptUserDTOToModel(user: UserDTO): User {
+    return {
+      username: user.username,
+      password: user.password,
+      role: user.role,
+      _id: user._id
+    };
+  }
+
+  private adaptUserModelToDTO(user: User): UserDTO {
+    return {
+      username: user.username,
+      password: user.password,
+      role: user.role,
+      _id: user._id
+    };
+  }
+
+}
+}

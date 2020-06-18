@@ -4,7 +4,7 @@
       align-items: center;
       flex-direction: column;
       min-height: 95vh;
-      padding: 70px 0 0 0;
+      padding: o.5%;
   }
   .card {
 h4 {
@@ -104,6 +104,7 @@ main {
   display: flex;
   float: left;
   width: 31%;
+  padding: 1em;
   margin-right: 2%;
   background: white;
   box-sizing: border-box;
@@ -112,7 +113,6 @@ main {
   padding: $spacing;
   box-shadow: 0 20px 20px rgba(0, 0, 0, .08);
   transition: all 250ms cubic-bezier(.02, .01, .47, 1);
-
   &:focus,
   &:hover {
     box-shadow: 0 30px 30px rgba(0, 0, 0, .16);
