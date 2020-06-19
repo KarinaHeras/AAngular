@@ -5,8 +5,10 @@ a {
   color: rgb(12, 127, 235);
   padding: 7px;
   margin: 10px;
-  padding-top: 15px;
+  padding-top: 30px;
+  font-size: 1rem;
   text-align: center;
+  font-weight: bold;
 }
 
 

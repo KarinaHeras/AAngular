@@ -15,6 +15,6 @@ export interface Post {
 
 
 export interface User {
-  id: number;
+  id?: number;
   rol: string;
 }

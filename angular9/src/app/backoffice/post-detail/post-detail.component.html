@@ -1,1 +1,38 @@
-<p>post-detail works!</p>
+<p>Estoy en mostrar los detalles!</p>
+<div class="adrees_card">
+<p>{{post.title}}</p>
+<p>{{post.content}}</p>
+<button *ngIf="!isCollapsed" (click)="toggleCollapse"> Detalles</button>
+<button *ngIf="!isCollapsed"  (click)="toggleCollapse"> Cerrar</button>
+<div *ngIf="!isCollapsed">
+<p class="postId">{{post._id}}</p>
+<div class="title" ngIf="post.title.length">
+<p>titulo</p>
+<p *ngFor="let title of post.title">{{title}}</p>
+<p>{{post.content}}</p>
+<p>{{post.nameAuthor}}</p>
+
+</div>
+</div>
+</div>
+
+
+
+
+
+
+
+<!--<div class="container" *ngIf="post">
+    <h1>Detalles del Post</h1>
+      Id:{{ post._id}} <br>
+        Titulo:{{ post.title}}<br>
+        Descripcion:{{ post.content}}<br>
+        Nombre:{{ post.nameAuthor}}<br>
+       <button md-button (click)="onCerrar">Cerrar</button>
+        </div>-->
+
+
+
+
+
+

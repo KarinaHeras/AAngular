@@ -9,7 +9,22 @@
 <div id="grid">
 
 <article class="card" *ngFor="let post of (getAll$ | async)">
-        <post-card  [titulo]="post.title" [contenido]="post.content">
+  <post-card  [titulo]="post.title" [contenido]="post.content" (boton)="toggleCollapse(post._id)">
         </post-card>
 
 </article>
+
+<!--<app-post-detail [postDetailbtn]= "postDetailbtn" (cerrar)="cerrarDetalle()"></app-post-detail>
+<md-card *ngFor="detail">
+<md-card-title>
+Detalles de los Post
+</md-card-title>
+<md-card-content>
+<!--title:{{post.title}}
+content{{post.content}}
+Nombre Autor:{{post.nameAuthor}}
+fecha: {{post.fecha}}
+<button md-button (click)="onCerrar">Cerrar</button>
+</md-card-content>
+
+</md-card>-->

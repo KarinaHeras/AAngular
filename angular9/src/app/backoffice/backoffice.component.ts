@@ -13,7 +13,6 @@ import { PostDetailStoreService } from '../store/post-detail-store.service';
   styleUrls: ['./backoffice.component.css']
 })
 export class BackofficeComponent implements OnInit {
-
   deleteCommentSub: Subscription;
   post$: Observable<Post>;
   editPostBtn: boolean;
@@ -22,12 +21,13 @@ export class BackofficeComponent implements OnInit {
   error: string;
   token: string;
   postID: string;
-
+  post = null;
+  posts: any[];
   constructor(
     private activatedRoute: ActivatedRoute,
     private router: Router,
     private storePostDetail: PostDetailStoreService,
-    private storePost: PostService,
+    private Postservi: PostService,
     private notificationsBus: NotificacionesBusService
   ) { }
 
@@ -39,17 +39,16 @@ export class BackofficeComponent implements OnInit {
 
     this.postID =  this.activatedRoute.snapshot.paramMap.get('id');
     this.storePostDetail.init(this.postID);
-    this.post$ = this.storePostDetail.get$();
 
     this.token = localStorage.getItem('token');
   }
 
-  editPost(){
+  Post(){
     this.editPostBtn = !this.editPostBtn;
   }
 
   deletePost(){
-    this.storePost.deletePost$(this.postID);
+    this.Postservi.deletePost(this.postID);
     this.router.navigate(['backOffice']);
     this.notificationsBus.showWarn('Tu publicación ha sido eliminada correctamente!' );
   }
@@ -58,8 +57,27 @@ export class BackofficeComponent implements OnInit {
     this.router.navigate(['backOffice']);
   }
 
-  updateComment$(id: string, comment: Comment){
-    this.storePostDetail.updateComment$(id, comment);
+  onClick(post){
+    this.post = post;
   }
 
+  onSelect(event){
+    let query = null;
+    if (event.values == 'post') {
+    query = this.Postservi.getAll();
+    }
+    else {
+    query = this.Postservi.getPublicPost();
+    query.subcribe(posts => {
+      this.posts = this.posts ;
+    });
+    this.post = null;
+    }
+    }
+
+cerrarDetalles(){
+    this.post = null;
+  }
 }
+
+

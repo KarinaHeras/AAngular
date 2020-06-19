@@ -6,7 +6,7 @@ import { PostDetailDto } from '../business/Model/postDetailDto';
 @Injectable({
   providedIn: 'root'
 })
-export class BackofficeProsyService {
+export class BackofficeProxyService {
 
   constructor(private httpClient: HttpClient) { }
 

@@ -2,12 +2,12 @@
     <div class="col-md-4 mx-auto">
         <div class="card">
             <div class="card-he">
-                SignIn
+                Login
             </div>
             <div class="card-body">
                 <form (submit)="signIn()">
                     <div class="form-group">
-                        <input type="text" [(ngModel)]="user.username" name="username" class="form-control" placeholder="UserName" required>
+                         <input type="text" [(ngModel)]="user.username" name="username" class="form-control" placeholder="username" required autofocus>
                     </div>
                     <div class="form-group">
                         <input type="password" [(ngModel)]="user.password" name="password" class="form-control" placeholder="Password" required>
@@ -20,6 +20,8 @@
         </div>
     </div>
 </div>
+
+
 <!--{{ signinForm.status }}
 
 {{signinForm.value | json}}

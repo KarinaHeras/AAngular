@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { ServiceErrorService } from './service-error.service';
 
 @Component({
   selector: 'app-error',
@@ -7,22 +9,22 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ErrorComponent implements OnInit {
 
-  // data: { message: string };
-  // private errorSub: Subscription;
-  constructor( public data: { message: string }) {}
+  data: { message: string };
+  private errorSub: Subscription;
+  constructor( private errorServi: ServiceErrorService, public data: { message: string }) {}
   // constructor(private errorService: ErrorService) {}
 
    ngOnInit() {
-  //   this.errorSub = this.errorService.getErrorListener().subscribe(message => {
-  //     this.data = { message: message };
-  //   });
+    this.errorSub = this.errorServi.getErrorListener().subscribe(message => {
+      this.data = { message };
+    });
   }
 
-  // onHandleError() {
-  //   this.errorService.handleError();
-  // }
+  onHandleError() {
+    this.errorServi.handleError();
+   }
 
-  // ngOnDestroy() {
-  //   this.errorSub.unsubscribe();
-  // }
+   ngOnDestroy() {
+     this.errorSub.unsubscribe();
+   }
 }

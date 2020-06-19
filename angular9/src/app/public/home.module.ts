@@ -3,6 +3,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from '../auth.guard';
+import { PostDetailComponent } from '../backoffice/post-detail/post-detail.component';
 import { CreatePostComponent } from '../business/post/create-post/create-post.component';
 import { PostEditComponent } from '../business/post/post-edit/post-edit.component';
 import { PostListComponent } from '../business/post/post-list/post-list.component';
@@ -25,12 +26,15 @@ const ROUTES: Routes = [
    { path: 'post/create', component: CreatePostComponent },
    { path: 'post/:postId/edit', component: PostEditComponent },
    { path: '', component: PostListCardComponent },
-   { path: '', redirectTo: '/post/card', pathMatch: 'full' }
+   { path: '', redirectTo: '/post/card', pathMatch: 'full' },
+   { path: 'post/detail', component: PostDetailComponent}
 
 
 ];
 @NgModule({
-  declarations: [HomeComponent],
+  declarations: [
+   HomeComponent
+  ],
   imports: [
     CommonModule,
     HttpClientModule,

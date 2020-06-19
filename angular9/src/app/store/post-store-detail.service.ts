@@ -1,4 +1,8 @@
 import { Injectable } from '@angular/core';
+import { tap } from 'rxjs/operators';
+import { Post } from '../business/Model/post.model';
+import { PostDetail } from '../business/Model/postDetail';
+import { PostDetailService } from './post-detail.service';
 
 @Injectable({
   providedIn: 'root'
@@ -51,6 +55,5 @@ updateComment$(id: string, comment: PostDetail): Promise<PostDetail> {
 
 private searchIndex(comments: PostDetail[], commentId: string): number {
     return comments.findIndex(item => item._id === commentId);
-}
 }
 }

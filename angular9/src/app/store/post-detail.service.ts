@@ -1,17 +1,24 @@
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs/internal/Observable';
+import { map } from 'rxjs/operators';
+import { BackofficeProxyService } from '../backoffice/backoffice-proxy.service';
+import { PostDto } from '../business/Model/post.dto';
+import { Post } from '../business/Model/post.model';
+import { PostDetail } from '../business/Model/postDetail';
+import { PostDetailDto } from '../business/Model/postDetailDto';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PostDetailService {
 
-  constructor(private proxy: BackOfficeProxyService) { }
+  constructor(private proxy: BackofficeProxyService) { }
 
   getAllPost(): Observable<Post[]> {
     return this.proxy.getAllPost().pipe(
-      map((postsDTO: PostDTO[]) => {
+      map((postsDto: PostDto[]) => {
         let posts: Post[] = [];
-        postsDTO.forEach((postDTO: PostDTO) => {
+        postsDto.forEach((postDTO: PostDto) => {
           posts = [...posts, this.adaptPostDTOToModel(postDTO)];
         });
         return posts;
@@ -21,19 +28,19 @@ export class PostDetailService {
 
   getPostById(id: string): Observable<Post> {
     return this.proxy.getPostById(id).pipe(
-      map((postDTO: PostDTO) => this.adaptPostDTOToModel(postDTO))
+      map((postDTO: PostDto) => this.adaptPostDTOToModel(postDTO))
     );
   }
 
   savePost(post: Post): Observable<Post> {
     return this.proxy.savePost(this.adaptPostModelToDTO(post)).pipe(
-      map((postResult: PostDTO) => this.adaptPostDTOToModel(postResult))
+      map((postResult: PostDto) => this.adaptPostDTOToModel(postResult))
     );
   }
 
   updatePost(id: string, post: Post): Observable<Post> {
     return this.proxy.updatePost(id, this.adaptPostModelToDTO(post)).pipe(
-      map((postResult: PostDTO) => this.adaptPostDTOToModel(postResult))
+      map((postResult: PostDto) => this.adaptPostDTOToModel(postResult))
     );
   }
 
@@ -45,13 +52,13 @@ export class PostDetailService {
 
   addComment(id: string, comment: PostDetail): Observable<PostDetail> {
     return this.proxy.addComment(id, this.adaptPostDetailModelToDTO(comment)).pipe(
-      map((postDetailResult: PostDetailDTO) => this.adaptPostDetailDTOToModel(postDetailResult))
+      map((postDetailResult: PostDetailDto) => this.adaptPostDetailDTOToModel(postDetailResult))
     );
   }
 
   updateComment(id: string, comment: PostDetail): Observable<PostDetail> {
     return this.proxy.updateComment(id, this.adaptPostDetailModelToDTO(comment)).pipe(
-      map((postDetailResult: PostDetailDTO) => this.adaptPostDetailDTOToModel(postDetailResult))
+      map((postDetailResult: PostDetailDto) => this.adaptPostDetailDTOToModel(postDetailResult))
     );
   }
 
@@ -61,35 +68,30 @@ export class PostDetailService {
     );
   }
 
-  createUser(user): Observable<User> {
-    return this.proxy.createUser(this.adaptUserModelToDTO(user)).pipe(
-      map((userResult: UserDTO) => this.adaptUserDTOToModel(userResult))
-    );
-  }
 
-  private adaptPostDTOToModel(postDTO: PostDTO): Post {
+
+  private adaptPostDTOToModel(postDTO: PostDto): Post {
     return {
-      id: postDTO._id,
+      _id?: postDTO.id,
       nickname: postDTO.nickname,
-      authorId: postDTO.authorId,
+      idAuthorId: postDTO.idAuthor,
       title: postDTO.title,
       content: postDTO.content,
       comments: postDTO.comments
     };
   }
 
-  private adaptPostModelToDTO(post: Post): PostDTO {
+  private adaptPostModelToDTO(post: Post): PostDto {
     return {
-      _id: post.id,
+      id: post._id,
       nickname: post.nickname,
-      authorId: post.authorId,
       title: post.title,
       content: post.content,
       comments: post.comments
     };
   }
 
-  private adaptPostDetailDTOToModel(postDetailDTO: PostDetailDTO): PostDetail {
+  private adaptPostDetailDTOToModel(postDetailDTO: PostDetailDto): PostDetail {
     return {
       _id: postDetailDTO._id,
       authorId: postDetailDTO.authorId,
@@ -99,7 +101,7 @@ export class PostDetailService {
     };
   }
 
-  private adaptPostDetailModelToDTO(postDetail: PostDetail): PostDetailDTO {
+  private adaptPostDetailModelToDTO(postDetail: PostDetail): PostDetailDto {
     return {
       _id: postDetail._id,
       authorId: postDetail.authorId,
@@ -109,23 +111,6 @@ export class PostDetailService {
     };
   }
 
-  private adaptUserDTOToModel(user: UserDTO): User {
-    return {
-      username: user.username,
-      password: user.password,
-      role: user.role,
-      _id: user._id
-    };
+
   }
 
-  private adaptUserModelToDTO(user: User): UserDTO {
-    return {
-      username: user.username,
-      password: user.password,
-      role: user.role,
-      _id: user._id
-    };
-  }
-
-}
-}
