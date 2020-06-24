@@ -100,7 +100,7 @@ getProtectedPost(): Observable < string > {
   {responseType: 'text'});
 }
 getCommentsByPostsId(postId: string): Observable<Post> {
-  return this.proxy.getPostById(postId).pipe(
+  return this.proxy.getAllPost$(postId).pipe(
     map(postDTO => this.postDetail.adaptDTOToPost(postDTO))
   );
 }

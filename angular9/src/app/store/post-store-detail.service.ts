@@ -15,13 +15,13 @@ export class PostStoreDetailService extends Store<Post> {
 }
 
 init(id): Promise<Post> {
-    return this.service.getPostById(id).pipe(
+    return this.service.findById(id).pipe(
         tap(post => this.store(post))
     ).toPromise();
 }
 
 addComment$(id: string, comment: PostDetail): Promise<PostDetail> {
-    return this.service.addComment(id, comment).pipe(
+    return this.service.getCommentsByPostsId(id, comment).pipe(
         tap(newComment => {
             const post = this.get();
             const newComments = [...post.comments, newComment];

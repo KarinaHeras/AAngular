@@ -40,7 +40,7 @@ export class BackofficeComponent implements OnInit {
 
 
     this.postID =  this.activatedRoute.snapshot.paramMap.get('id');
-    this.storePostDetail.init(this.postID);
+   // this.storePostDetail.init(this.postID);
 
     this.token = localStorage.getItem('token');
   }
@@ -52,7 +52,7 @@ export class BackofficeComponent implements OnInit {
   deletePost(){
     this.Postservi.deletePost(this.postID);
     this.router.navigate(['backOffice']);
-    this.notificationsBus.showWarn('Tu publicación ha sido eliminada correctamente!' );
+   // this.notificationsBus.showWarn('Tu publicación ha sido eliminada correctamente!' );
   }
 
   backOffice(){

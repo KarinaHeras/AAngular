@@ -11,6 +11,10 @@ export class BackofficeProxyService {
   constructor(private httpClient: HttpClient) { }
   readonly URL = 'http://localhost:3000';
 
+  createUser(user): Observable < UserDTO > {
+    return this.httpClient.post<UserDTO>('http://localhost:3000/user/', user);
+  }
+
   getAllPost$(): Observable < PostDto[] > {
     return this.httpClient.get<PostDto[]>(this.URL);
     }
@@ -42,9 +46,6 @@ deleteComment(id): Observable < postModelDto > {
     }
 
 
-createUser(user): Observable < UserDTO > {
-    return this.httpClient.post<UserDTO>('http://localhost:3000/user/', user);
-  }
 
 
 }

@@ -1,29 +1,11 @@
 <p>Estoy en mostrar los detalles!</p>
-<div *ngIf=" (comments$ | async)?.length > 0; else noComment">
-<div>
-<div class="card" *ngFor="let comment of comments$ | async; index as i" >
-    <p class="card-title">Autor: {{ comment?.nameAuthor }} </p>
-    <p> {{ comment?.title }}</p>
-    <p>{{ comment?.Content }}</p>
-  </div>
-</div>
-</div>
-<div #noComment>
-  <p>No existen comentarios</p>
-</div>-->
 
-
-<!--<p  *ngIf="(post$ | async)?.comments.length > 0"> {{(post$ | async)?.comments.length}} Comentarios</p>
-<div *ngFor="let comment of (post$ | async)?.comments">
-  <post-detail [comments]="comment"></post-detail>
+<div *ngFor="let comment of post?.comments">
+<p>{{comment?.comment | json}}</p>
+<p>{{comment?.comment | json}}</p>
+<p>{{comment?.nickname}}</p>
+<p>{{comment?.post_id}}</p>
 </div>
-<div  *ngIf="(post$ | async)?.comments.length <= 0">
+<div  *ngIf="post?.comments.length <= 0">
   <p>No existen mas comentarios</p>
-</div> -->
-
-<!--<p *ngIf="(post$ | async)?.comments.length > 0"> {{(post$ | async)?.comments.length}} Comentarios</p>
-<div  *ngFor="let comment of (post$ | async)?.comments">
 </div>
-<div  *ngIf="(post$ | async)?.comments.length <= 0">
-  <p >No existen mas  comentarios</p>
-</div>-->

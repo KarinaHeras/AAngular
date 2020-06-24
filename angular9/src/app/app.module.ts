@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -5,6 +6,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule, Routes } from '@angular/router';
 import { AppComponent } from './app.component';
 import { AuthGuard } from './auth.guard';
+import { BackofficeModule } from './backoffice/backoffice.module';
 import { CreatePostComponent } from './business/post/create-post/create-post.component';
 import { PostEditComponent } from './business/post/post-edit/post-edit.component';
 import { PostListComponent } from './business/post/post-list/post-list.component';
@@ -44,6 +46,8 @@ const ROUTES: Routes = [
     ReactiveFormsModule,
     HomeModule,
     FormsModule,
+    CommonModule,
+    BackofficeModule,
 
 
     RouterModule.forRoot(ROUTES)
