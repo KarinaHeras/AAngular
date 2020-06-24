@@ -1,6 +1,8 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { Post } from 'src/app/business/Model/post.model';
-import { PostService } from 'src/app/business/post/post.service';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { Observable } from 'rxjs/internal/Observable';
+import { PostDetail } from 'src/app/business/Model/postDetail';
+import { PostDetailService } from 'src/app/store/post-detail.service';
 
 @Component({
   selector: 'app-post-detail',
@@ -9,46 +11,20 @@ import { PostService } from 'src/app/business/post/post.service';
 })
 export class PostDetailComponent implements OnInit {
 
-  isCollapsed = true;
-  // tslint:disable-next-line: no-input-rename
-  @Input('post') post: Post;
-// @Input() post: any = null;
-  // @Output() cerrar = new EventEmitter();
+  post: Observable<PostDetail>;
+  id: string;
+  constructor( private activatedRoute: ActivatedRoute, private proxy: PostDetailService) { }
 
-constructor(private postServi: PostService) { }
-
-toggleCollapse(){
-  this.isCollapsed = !this.isCollapsed;
-}
-
-  ngOnInit() {
+  ngOnInit(): void {
+    this.getPostAll();
+  }
+  getPostAll() {
+    this.id = this.activatedRoute.snapshot.params.id;
+    this.proxy.findById(this.id);
   }
 
-//   onSelect(event){
-//     let query = null;
-//     if (event.values == 'post') {
-//     query = this.postServi.getAll();
-//     }
-//     else {
-//     query = this.postServi.getPublicPost();
-//     query.subcribe(post => {
-//       this.post = post;
-//     });
-//     this.post = null;
-//     }
-//     }
+  }
 
 
-// onCerrar(){
-//     this.cerrar.emit();
-//   }
 
-// onClick(post){
-//     this.post = post;
-//   }
 
-// cerrarDetalles(){
-//     this.post = null;
-//   }
-
-}

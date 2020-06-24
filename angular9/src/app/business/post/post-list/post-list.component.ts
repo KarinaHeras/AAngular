@@ -27,6 +27,7 @@ userId: string;
     });
   }
 
+
   deletePost(_id){
     console.log(' NOOOOOOOO--------llego al subcribe');
 

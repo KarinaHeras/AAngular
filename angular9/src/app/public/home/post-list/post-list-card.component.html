@@ -9,11 +9,13 @@
 <div id="grid">
 
 <article class="card" *ngFor="let post of (getAll$ | async)">
-  <post-card  [titulo]="post.title" [contenido]="post.content" (boton)="toggleCollapse(post._id)">
+        <post-card  [titulo]="post.title" [contenido]="post.content" (boton)="onSelectPost(post._id)">
+      <!--  <button-post [detelles]="post.detail" ><a "onclick(post)"[routerLink]="['post-detail/']">LEER MÁS >></a></button-post>-->
+
         </post-card>
 
 </article>
-
+<app-post-detail></app-post-detail>
 <!--<app-post-detail [postDetailbtn]= "postDetailbtn" (cerrar)="cerrarDetalle()"></app-post-detail>
 <md-card *ngFor="detail">
 <md-card-title>

@@ -1,15 +1,16 @@
 import { Injectable } from '@angular/core';
 import { tap } from 'rxjs/operators';
+import { Store } from 'src/store/store';
+import { BackofficeService } from '../backoffice/backoffice.service';
 import { Post } from '../business/Model/post.model';
 import { PostDetail } from '../business/Model/postDetail';
-import { PostDetailService } from './post-detail.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class PostStoreDetailService {
+export class PostStoreDetailService extends Store<Post> {
 
-  constructor(private service: PostDetailService) {
+  constructor(private service: BackofficeService) {
     super();
 }
 

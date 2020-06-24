@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { tap } from 'rxjs/operators';
 import { Store } from 'src/store/store';
 import { Post } from '../business/Model/post.model';
+import { PostDetail } from '../business/Model/postDetail';
 import { PostService } from '../business/post/post.service';
 
 @Injectable({
@@ -11,37 +12,53 @@ export class PostDetailStoreService extends Store<Post[]> {
 
   constructor(
 
-    private postService: PostService,
-    private postStore: Store) {
+    private service: PostService,
+    private ) {
     super();
 }
 
-init(id): Promise<Post>{
-    return this.postService.getPublicPost(_id).pipe(tap(post => this.store(post)))
-    .toPromise();
+init(id): Promise<Post> {
+  return this.service.findById(id).pipe(
+      tap(post => this.store(post))
+  ).toPromise();
 }
 
-
-
-
-
-
-updatePost$(postId: string, post: Post): Promise<Post> {
-    return this.postService.update(postId, post).pipe(
-        tap((newPost) => {
-            const postUpdate = this.get();
-            const p = Object.assign({}, newPost);
-            const updatePost = {...p, postComments: postUpdate.postComments};
-            this.store(update);
-            this.postStore.updatePost$(updatePost);
-    })
-    ).toPromise();
+addComment$(id: string, comment: PostDetail): Promise<PostDetail> {
+  return this.service.addComment(id, comment).pipe(
+      tap(newComment => {
+          const post = this.get();
+          const newComments = [...post.comments, newComment];
+          const newPost = { ...post, comments: newComments };
+          this.store(newPost);
+      })).toPromise();
 }
 
-
-private searchIndex(posts: Post[], postId: string) {
-    return posts.findIndex(item => item._id === postId);
+deleteComment$(id: string): Promise<PostDetail> {
+  return this.service.deletePost(id).pipe(
+      tap(() => {
+          const post = this.get();
+          const newPosts = post.comments.filter(comment => comment._id !== id);
+          const newPost = { ...post, comments: newPosts };
+          this.store(newPost);
+      })
+  ).toPromise();
 }
 
+updateComment$(id: string, comment: PostDetail): Promise<PostDetail> {
+  return this.service.updateComment(id, comment).pipe(
+      tap(newComment => {
+          const post = this.get();
+          const c = Object.assign({}, newComment);
+          const index = this.searchIndex(post.comments, id);
+          const newComments = [...post.comments.slice(0, index), c, ...post.comments.slice(index + 1)];
+          const newPost = { ...post, comments: newComments };
+          this.store(newPost);
+      })
+  ).toPromise();
+}
+
+private searchIndex(comments: PostDetail[], commentId: string): number {
+  return comments.findIndex(item => item._id === commentId);
+}
 }
 

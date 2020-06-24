@@ -19,7 +19,6 @@ const ROUTES: Routes = [
   { path: 'signup', component:  SignupComponent},
   { path: 'signin', component:  SigninComponent},
    { path: 'post', redirectTo: 'post/index', pathMatch: 'full'},
-   { path: 'post', redirectTo: 'post/index', pathMatch: 'full'},
   { path: 'post/list', component: PostListComponent },
    { path: 'post/create', component: CreatePostComponent },
    { path: 'post/:postId/edit', component: PostEditComponent },

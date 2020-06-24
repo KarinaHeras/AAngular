@@ -9,12 +9,13 @@ export interface Post {
   comments?: string;
   // user: number;
 
-
   }
 
 
 
 export interface User {
-  id?: number;
-  rol: string;
+    username: string;
+    password: string;
+    role: string;
+    _id: string;
 }

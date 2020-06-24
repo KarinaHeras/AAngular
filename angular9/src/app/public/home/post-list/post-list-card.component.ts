@@ -10,12 +10,15 @@ import { PostService } from 'src/app/business/post/post.service';
   styleUrls: ['./post-list-card.component.css']
 })
 export class PostListCardComponent implements OnInit {
-  // @Input() cerrar: any = null;
-  // @Output() post = new EventEmitter();
-  // postDetailbtn: null;
+
 getAll$: Observable<Post[]>;
-isCollapsed = true;
-constructor(private service: PostService, private router: Router, private route: ActivatedRoute) { }
+postSeleccionado: Post;
+post: Post;
+  constructor(
+    private service: PostService,
+    private router: Router,
+    private route: ActivatedRoute
+    ) { }
 
 ngOnInit(): void {
     this.getAllPost();
@@ -24,50 +27,24 @@ ngOnInit(): void {
 getAllPost(): void{
   console.log('llego al get');
   this.getAll$ = this.service.getAll();
-  console.log('estos son los post', this.getAll$);
   }
 
 submit() {
     this.router.navigateByUrl('home');
   }
 
-  // onSelect(event){
-  //   let query = null;
-  //   if (event.values == 'post') {
-  //   query = this.service.getAll();
-  //   }
-  //   else {
-  //   query = this.service.getPublicPost();
-  //   query.subcribe(post => {
-  //     this.post = post;
-  //   });
-  //   this.post = null;
-  //   }
-  //   }
-
-
-// onCerrar(){
-//     this.cerrar.emit();
-//   }
-
-// onClick(id: string){
-//   console.log('muestro el boton con id', id);
-//   this.router.navigate([`post/detail/${id}`], {relativeTo: this.route});
-//   console.log('muestro el boton despues');
-
-//   }
-
-// cerrarDetalles(){
-//     this.post = null;
-//   }
-
-toggleCollapse(id: string) {
-    console.log('muestro el boton con id', id);
-    this.isCollapsed = !this.isCollapsed;
-    this.router.navigate([`post/detail/${id}`], {relativeTo: this.route});
-    console.log('muestro el boton despues');
+ onClick(id: string){
+  console.log('muestro el boton con id', id);
+  this.router.navigate([`post/detail/${id}`], {relativeTo: this.route});
+  console.log('muestro el boton despues');
 
   }
-}
+  onSelectPost(id: string): void{
+    console.log('Post seleccionado ' + id);
+    this.router.navigate([`post/detail/${id}`]);
+
+    this.postSeleccionado = this.post;
+  }
+ }
 
 

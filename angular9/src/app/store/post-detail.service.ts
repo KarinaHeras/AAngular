@@ -1,116 +1,101 @@
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { throwError } from 'rxjs';
 import { Observable } from 'rxjs/internal/Observable';
-import { map } from 'rxjs/operators';
+import { catchError } from 'rxjs/internal/operators/catchError';
 import { BackofficeProxyService } from '../backoffice/backoffice-proxy.service';
-import { PostDto } from '../business/Model/post.dto';
 import { Post } from '../business/Model/post.model';
-import { PostDetail } from '../business/Model/postDetail';
-import { PostDetailDto } from '../business/Model/postDetailDto';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PostDetailService {
+  readonly URL = 'http://localhost:3000';
+  httpOptions = {
+      headers: new HttpHeaders(
+        {responseType: 'text'})
 
-  constructor(private proxy: BackofficeProxyService) { }
-
-  getAllPost(): Observable<Post[]> {
-    return this.proxy.getAllPost().pipe(
-      map((postsDto: PostDto[]) => {
-        let posts: Post[] = [];
-        postsDto.forEach((postDTO: PostDto) => {
-          posts = [...posts, this.adaptPostDTOToModel(postDTO)];
-        });
-        return posts;
-      })
-    );
-  }
-
-  getPostById(id: string): Observable<Post> {
-    return this.proxy.getPostById(id).pipe(
-      map((postDTO: PostDto) => this.adaptPostDTOToModel(postDTO))
-    );
-  }
-
-  savePost(post: Post): Observable<Post> {
-    return this.proxy.savePost(this.adaptPostModelToDTO(post)).pipe(
-      map((postResult: PostDto) => this.adaptPostDTOToModel(postResult))
-    );
-  }
-
-  updatePost(id: string, post: Post): Observable<Post> {
-    return this.proxy.updatePost(id, this.adaptPostModelToDTO(post)).pipe(
-      map((postResult: PostDto) => this.adaptPostDTOToModel(postResult))
-    );
-  }
-
-  deletePost(id: string): Observable<Post> {
-    return this.proxy.deletePost(id).pipe(
-      map(postDTO => this.adaptPostDTOToModel(postDTO))
-    );
-  }
-
-  addComment(id: string, comment: PostDetail): Observable<PostDetail> {
-    return this.proxy.addComment(id, this.adaptPostDetailModelToDTO(comment)).pipe(
-      map((postDetailResult: PostDetailDto) => this.adaptPostDetailDTOToModel(postDetailResult))
-    );
-  }
-
-  updateComment(id: string, comment: PostDetail): Observable<PostDetail> {
-    return this.proxy.updateComment(id, this.adaptPostDetailModelToDTO(comment)).pipe(
-      map((postDetailResult: PostDetailDto) => this.adaptPostDetailDTOToModel(postDetailResult))
-    );
-  }
-
-  deleteComment(id: string): Observable<PostDetail> {
-    return this.proxy.deleteComment(id).pipe(
-      map(postDetailDTO => this.adaptPostDetailDTOToModel(postDetailDTO))
-    );
-  }
-
-
-
-  private adaptPostDTOToModel(postDTO: PostDto): Post {
-    return {
-      _id?: postDTO.id,
-      nickname: postDTO.nickname,
-      idAuthorId: postDTO.idAuthor,
-      title: postDTO.title,
-      content: postDTO.content,
-      comments: postDTO.comments
     };
+  constructor(private proxy: BackofficeProxyService, private httpClient: HttpClient) { }
+
+
+
+  private modals: any[] = [];
+
+  getAll(): Observable < Post[] > {
+      return this.httpClient.get<Post[]>(this.URL + '/posts/')
+      .pipe(
+        catchError(this.errorHandler)
+      );
+    }
+
+  create(post): Observable < Post > {
+      const httpOptions = { headers: new HttpHeaders({Authorization: 'Bearer ' +  localStorage.getItem('token')}) };
+      console.log('estamos enviando esto desde el front', JSON.stringify(post));
+      return this.httpClient.post<Post>(this.URL + '/posts/', post, httpOptions)
+      .pipe(
+        catchError(this.errorHandler)
+      );
+    }
+
+  findById(id): Observable < Post > {
+      return this.httpClient.get<Post>(this.URL + '/posts/' + id)
+      .pipe(
+        catchError(this.errorHandler)
+      );
+    }
+
+  update(id, post): Observable < Post > {
+      const httpOptions = { headers: new HttpHeaders({Authorization: 'Bearer ' +  localStorage.getItem('token')}) };
+      return this.httpClient.put<Post>(this.URL + '/posts/' + id, post, httpOptions)
+      .pipe(
+        catchError(this.errorHandler)
+      );
+    }
+
+    // deletePost(post: Post | number): Observable<Post> {
+    //   const httpOptions = {
+    //     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+    //   };
+    //   const id = typeof post === 'number' ? post : post._id;
+    //   const url = `${this.URL}/${id}`;
+
+    //   return this.httpClient.delete<Post>(this.URL, httpOptions).pipe(
+    //     tap(_ => console.log(`deleted Post id=${id}`)),
+    //     catchError(this.errorHandler<Post>('deletePost'))
+    //   );
+    // }
+    // deletePost(id: string): Observable<Post> {
+    //   return this.proxy.delete$(id).pipe(
+    //          catchError(this.errorHandler)
+    //        );
+
+    // }
+
+  deletePost(_id) {
+      const httpOptions = { headers: new HttpHeaders({Authorization: 'Bearer ' +  localStorage.getItem('token')}) };
+      return this.httpClient.delete<Post>(this.URL + '/posts/' + _id, httpOptions)
+      .pipe(
+        catchError(this.errorHandler)
+      );
+    }
+
+
+  errorHandler(error) {
+      let errorMessage = '';
+      if (error.error instanceof ErrorEvent) {
+        errorMessage = error.error.message;
+      } else {
+        errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
+      }
+      return throwError(errorMessage);
+   }
+  getPublicPost(): Observable < string > {
+    return this.httpClient.get(this.URL, {responseType: 'text'});
   }
 
-  private adaptPostModelToDTO(post: Post): PostDto {
-    return {
-      id: post._id,
-      nickname: post.nickname,
-      title: post.title,
-      content: post.content,
-      comments: post.comments
-    };
+  getProtectedPost(): Observable < string > {
+    return this.httpClient.get(this.URL,
+    {responseType: 'text'});
+    }
   }
-
-  private adaptPostDetailDTOToModel(postDetailDTO: PostDetailDto): PostDetail {
-    return {
-      _id: postDetailDTO._id,
-      authorId: postDetailDTO.authorId,
-      nickname: postDetailDTO.nickname,
-      comment: postDetailDTO.comment,
-      date: postDetailDTO.date
-    };
-  }
-
-  private adaptPostDetailModelToDTO(postDetail: PostDetail): PostDetailDto {
-    return {
-      _id: postDetail._id,
-      authorId: postDetail.authorId,
-      nickname: postDetail.nickname,
-      comment: postDetail.comment,
-      date: postDetail.date
-    };
-  }
-
-
-  }
-

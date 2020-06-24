@@ -1,14 +1,18 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, throwError } from 'rxjs';
-import { catchError } from 'rxjs/operators';
-import { Post } from '../Model/post.model';
-import { PostProxyService } from './post-proxy.service';
+import { throwError } from 'rxjs';
+import { Observable } from 'rxjs/internal/Observable';
+import { catchError, map } from 'rxjs/operators';
+import { Post } from '../business/Model/post.model';
+import { BackofficeProxyService } from './backoffice-proxy.service';
 
-@Injectable({providedIn: 'root'})
-export class PostService {
+@Injectable({
+  providedIn: 'root'
+})
+export class BackofficeService {
+  postDetail: any;
 
-  constructor(private httpClient: HttpClient, private proxy: PostProxyService) { }
+  constructor( private proxy: BackofficeProxyService, private httpClient: HttpClient, ) { }
 
   readonly URL = 'http://localhost:3000';
 httpOptions = {
@@ -95,6 +99,9 @@ getProtectedPost(): Observable < string > {
   return this.httpClient.get(this.URL,
   {responseType: 'text'});
 }
-
-
+getCommentsByPostsId(postId: string): Observable<Post> {
+  return this.proxy.getPostById(postId).pipe(
+    map(postDTO => this.postDetail.adaptDTOToPost(postDTO))
+  );
+}
 }

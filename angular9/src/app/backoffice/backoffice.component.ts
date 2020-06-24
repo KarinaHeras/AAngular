@@ -13,6 +13,7 @@ import { PostDetailStoreService } from '../store/post-detail-store.service';
   styleUrls: ['./backoffice.component.css']
 })
 export class BackofficeComponent implements OnInit {
+
   deleteCommentSub: Subscription;
   post$: Observable<Post>;
   editPostBtn: boolean;
@@ -23,6 +24,8 @@ export class BackofficeComponent implements OnInit {
   postID: string;
   post = null;
   posts: any[];
+  postSeleccionado: Post;
+
   constructor(
     private activatedRoute: ActivatedRoute,
     private router: Router,
@@ -32,7 +35,6 @@ export class BackofficeComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-
     this.editPostBtn = false;
     this.editCommentBtn = false;
 
@@ -61,23 +63,12 @@ export class BackofficeComponent implements OnInit {
     this.post = post;
   }
 
-  onSelect(event){
-    let query = null;
-    if (event.values == 'post') {
-    query = this.Postservi.getAll();
-    }
-    else {
-    query = this.Postservi.getPublicPost();
-    query.subcribe(posts => {
-      this.posts = this.posts ;
-    });
-    this.post = null;
-    }
+
+
     }
 
-cerrarDetalles(){
-    this.post = null;
-  }
-}
+
+
+
 
 
