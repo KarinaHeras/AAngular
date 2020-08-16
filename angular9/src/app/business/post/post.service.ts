@@ -50,6 +50,14 @@ update(id, post): Observable < Post > {
     );
   }
 
+  find(id): Observable<Post> {
+    return this.httpClient.get<Post>(this.URL + '/posts/' + id)
+    .pipe(
+      catchError(this.errorHandler)
+    );
+  }
+
+
   // deletePost(post: Post | number): Observable<Post> {
   //   const httpOptions = {
   //     headers: new HttpHeaders({ 'Content-Type': 'application/json' })

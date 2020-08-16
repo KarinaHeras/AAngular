@@ -1,6 +1,35 @@
-<p>Estoy en mostrar los detalles!</p>
+<div class="container">
+    <h5>Detalles Post</h5>
+    <a href="/home" routerLink="/home" class="btn btn-primary">Back</a>
 
-<div *ngFor="let comment of post?.comments">
+    <div>
+        <strong>ID:</strong>
+        <p>{{ post._id }}</p>
+    </div>
+
+    <div>
+        <strong>Title:</strong>
+        <p>{{ post.title }}</p>
+    </div>
+
+    <div>
+        <strong>Comentario:</strong>
+        <p>{{ post.comments}}</p>
+    </div>
+
+
+     <div>
+        <strong>Nickname:</strong>
+        <p>{{ post.nickname }}</p>
+    </div>
+    <div  *ngIf="post?.comments.length <= 0">
+  <p>No existen mas comentarios</p>
+</div>
+</div>
+
+
+
+<!--<div *ngFor="let comment of post?.comments">
 <p>{{comment?.comment | json}}</p>
 <p>{{comment?.comment | json}}</p>
 <p>{{comment?.nickname}}</p>
@@ -8,4 +37,4 @@
 </div>
 <div  *ngIf="post?.comments.length <= 0">
   <p>No existen mas comentarios</p>
-</div>
+</div>-->

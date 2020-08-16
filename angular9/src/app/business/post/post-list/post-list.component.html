@@ -5,16 +5,18 @@
 
     <table class="table table-bordered">
       <tr>
-        <th>ID</th>
+       <!-- <th>ID</th>-->
         <th>Titulo</th>
         <th>Descripcion</th>
         <th width="220px">aqui iran los botones</th>
       </tr>
       <tr *ngFor="let post of posts">
-      <td>{{ post._id }}</td>
+    <!---  <td>{{ post._id }}</td>-->
         <td routerLink="['/post/detail', post._id, 'deteil']">{{ post.title }}</td>
         <td>{{ post.content }}</td>
+        
         <td>
+          <a href="#" [routerLink]="['/post/', post.id, 'datail']" class="btn btn-info">Ver</a>
           <a href="#" [routerLink]="['/post/', post._id, 'edit']" class="btn btn-primary">Editar</a>
           <button type="button" (click)="deletePost(post._id)" class="btn btn-danger">Delete</button>
         </td>
